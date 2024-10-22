@@ -1,0 +1,433 @@
+
+        <style>
+            :root {
+    --c1_quiz: #7854cf;
+    --c2_quiz: #35313b;
+    --c3_quiz: #595463;
+    --c4_quiz: #3daab3;
+    --w: #fff;
+    --brm: 10px;
+    --br: 20px;
+    --brb: 40px;
+    --bo: #ffffff12;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+.boxQuiz {
+    width: 100%;
+    max-width: 25%;
+}
+.quizContainer {
+    display: flex;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    flex-wrap: wrap;
+    color: black;
+    justify-content: center;
+}
+.quiz-preview {
+    background-color: #fff;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--br);
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.quiz-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--br);
+}
+#popup-description-content {
+    margin: 15px 0;
+}
+#quiz-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+button#next-quiz, #initial-popup-button {
+    background: var(--c1_quiz);
+    width: auto;
+    margin: 15px 0 0;
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    border: 0;
+    border-radius: var(--brb);
+    cursor: pointer;
+}
+#next-quiz:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+#quiz-options button {
+    background: #ebebeb;
+    width: 100%;
+    max-width: 40%;
+    margin: 5px;
+    padding: 15px;
+    font-weight: 600;
+    color: black;
+    border: none;
+    border-radius: var(--brb);
+    cursor: pointer;
+}
+#quiz-options button.quiz-option.selected {
+    background-color: var(--c1_quiz);
+    color: white;
+}
+.starsBox {
+    display: flex;
+    margin: 1rem 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.starsBox .starBad, .starsBox .starGood {
+    font-size: 13px;
+}
+#quiz-title {
+    margin: 12px 0;
+}
+.quiz-stars {
+    display: flex;
+    margin: 0 12px;
+    justify-content: center;
+}
+.star {
+    font-size: 30px;
+    cursor: pointer;
+    color: #ccc;
+    letter-spacing: 9px;
+}
+.star.active {
+    color: gold;
+}
+
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000036;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    border-radius: var(--br);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+.popup.hidden {
+    display: none;
+}
+.popup.visible {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+}
+.popup-content {
+    background-color: white;
+    position: relative;
+    width: 100%;
+    margin: 0 10px;
+    padding: 15px;
+    border-radius: var(--br);
+    text-align: center;
+    box-shadow: 0 0 20px -13px black;
+}
+#popup-button {
+    position: relative;
+    display: inline-flex;
+    padding: 10px 20px;
+    background: var(--c1_quiz);
+    font-weight: 700;
+    color: white;
+    border: 2px solid transparent;
+    text-decoration: none;
+    border-radius: var(--brb);
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+#popup-button::before {
+    content: '';
+    background: inherit;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    right: 0;
+    width: 98%;
+    height: 96%;
+    margin: 0 auto;
+    border-radius: var(--br);
+    z-index: 1;
+    filter: blur(3px);
+}
+#popup-button::after {
+    content: '';
+    background: white;
+    position: absolute;
+    top: 0;
+    left: -13px;
+    width: 120%;
+    height: 110%;
+    filter: blur(10px);
+    animation: popupButton 10s ease infinite;
+    z-index: 0;
+}
+@keyframes popupButton {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.popup-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--br);
+}
+.popup .close {
+    position: absolute;
+    display: none;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+}
+h2#popup-title-content, h2#initial-popup-title {
+    margin: 0 0 1rem;
+    font-weight: 700;
+    padding: 0;
+    color: var(--c1_quiz);
+}
+h2#popup-title-content {
+    font-size: 27px;
+}
+h2#initial-popup-title {
+    font-size: 22px;
+}
+#popup-subtitle-content {
+    margin: 1rem 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+#initial-popup-description {
+    font-size: 14px;
+}
+@media (max-width: 768px) {
+    .popup-content {
+        width: 95%;
+    }
+}
+        </style>
+        <div class="quizContainer">
+                <div class="quiz-preview">
+                    <div id="quiz-display">
+                        <div class="quiz-image">
+                            <img id="quiz-image" src="https://i.pinimg.com/736x/b5/9a/ad/b59aad3b0978244e984d5073f6264ef6.jpg" alt="Imagem do Quiz">
+                        </div>
+                        <div class="starsBox">
+                            <span class="starBad">Muito ruim</span>
+                            <div class="quiz-stars">
+                                <span class="star active" data-value="1">☆</span>
+                                <span class="star active" data-value="2">☆</span>
+                                <span class="star active" data-value="3">☆</span>
+                                <span class="star active" data-value="4">☆</span>
+                                <span class="star active" data-value="5">☆</span>
+                            </div>
+                            <span class="starGood">Muito bom</span>
+                        </div>
+                        <h3 id="quiz-title">Qual é o principal benefício de um copo Stanley?</h3>
+                        <div id="quiz-options"><button class="quiz-option" data-index="0">Mantém a bebida gelada por horas</button><button class="quiz-option" data-index="1">Tem um design super estiloso</button><button class="quiz-option" data-index="2">É ideal apenas para bebidas quentes</button><button class="quiz-option" data-index="3">Cabe em qualquer bolso</button></div>
+                        <button id="next-quiz" disabled="">Próximo</button>
+                    </div>
+
+<!-- Popup Inicial antes de começar o Quiz -->
+<div id="PopFirst" class="popup">
+    <div class="popup-content">
+        <h2 id="initial-popup-title">🎉 Ganhe Seu Copo Stanley + Barbie Exclusivo! 🎀</h2>
+        <p id="initial-popup-description">Participe do nosso quiz exclusivo e ganhe um copo Stanley em parceria com a Barbie! Responda ao quiz rapidinho e leve para casa esse copo incrível, que tem estilo e durabilidade. Você só paga o frete de R$47,69! Não perca a chance de ter essa edição especial e colecionável.</p>
+        <button id="initial-popup-button">Responder ao Quiz</button>
+    </div>
+</div>
+                <!-- Popup de Finalização -->
+                <div id="popup" class="popup">
+                    <div class="popup-content">
+                        <span class="close">×</span>
+                        <h2 id="popup-title-content">🎉 Parabéns! Você Ganhou Seu Copo Stanley + Barbie! 🎀</h2>
+                        <img id="popup-image-content" src="https://i.pinimg.com/736x/60/13/75/601375fbe8e39ab03f49ec3b8be2b35c.jpg" alt="Imagem do Popup">
+                        <p id="popup-subtitle-content">Seu copo está garantido, só falta um pequeno detalhe!</p>
+                        <p id="popup-description-content">Você completou o quiz com sucesso e agora o copo Stanley + Barbie é seu! Para receber essa edição especial em sua casa, basta pagar o frete de R$47,69.<br><br>🥤 Copo exclusivo Stanley + Barbie<br>❄️Mantém sua bebida gelada ou quente por horas<br>🌟 Design único e colecionável<br>Clique no botão abaixo para concluir o pedido e informar o endereço de entrega.</p>
+                        <a id="popup-button" href="https://pay.kirvano.com/2573b977-b3a3-4f45-8f25-b7c46dab22ce"><span style="position: relative;z-index: 2;">Finalizar e Receber Meu Copo</span></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script>
+            let quizzes = [{"title":"Qual é o principal benefício de um copo Stanley?","imageUrl":"https://i.pinimg.com/736x/b5/9a/ad/b59aad3b0978244e984d5073f6264ef6.jpg","options":["Mantém a bebida gelada por horas","Tem um design super estiloso","É ideal apenas para bebidas quentes","Cabe em qualquer bolso"]},{"title":"A Barbie já teve mais de 200 profissões ao longo dos anos. Qual destas NÃO foi uma delas?","imageUrl":"https://i.pinimg.com/736x/b5/9a/ad/b59aad3b0978244e984d5073f6264ef6.jpg","options":["Astronauta","Piloto de corrida","Engenheira de software","Chefe de cozinha"]},{"title":"Quais das opções abaixo seria a combinação perfeita para um copo Stanley no estilo Barbie?","imageUrl":"https://i.pinimg.com/736x/b5/9a/ad/b59aad3b0978244e984d5073f6264ef6.jpg","options":["Rosa com glitter","Prata fosco","Preto com listras douradas","Branco básico"]},{"title":"Se a Barbie fosse escolher uma bebida para levar no copo Stanley, o que seria?","imageUrl":"https://i.pinimg.com/736x/b5/9a/ad/b59aad3b0978244e984d5073f6264ef6.jpg","options":["Um chá gelado com limão","Um smoothie de frutas vermelhas","Café preto sem açúcar","Água com gás e limão"]}];
+            let popupConfig = {"title":"🎉 Parabéns! Você Ganhou Seu Copo Stanley + Barbie! 🎀","imageUrl":"https://i.pinimg.com/736x/60/13/75/601375fbe8e39ab03f49ec3b8be2b35c.jpg","subtitle":"Seu copo está garantido, só falta um pequeno detalhe!","description":"Você completou o quiz com sucesso e agora o copo Stanley + Barbie é seu! Para receber essa edição especial em sua casa, basta pagar o frete de R$47,69.\n\n🥤 Copo exclusivo Stanley + Barbie\n❄️Mantém sua bebida gelada ou quente por horas\n🌟 Design único e colecionável\nClique no botão abaixo para concluir o pedido e informar o endereço de entrega.","buttonText":"Finalizar e Receber Meu Copo","buttonLink":"https://pay.kirvano.com/2573b977-b3a3-4f45-8f25-b7c46dab22ce"};
+            (function() {
+    let currentQuizIndex = 0;
+    let selectedAnswer = null;
+    let currentRating = 0; // Variável para armazenar a avaliação por estrelas
+
+const clickSound = new Audio('https://cdn.shopify.com/s/files/1/0766/4471/2731/files/click-sound.mp3?v=1726841087');
+const clickResponse = new Audio('https://cdn.shopify.com/s/files/1/0766/4471/2731/files/button-pressed.mp3?v=1729309665');
+const winSound = new Audio('https://cdn.shopify.com/s/files/1/0766/4471/2731/files/bonus.mp3?v=1729308879');
+
+    // Função para carregar o quiz na visualização
+    function loadQuiz(quiz) {
+        selectedAnswer = null;
+        document.getElementById('next-quiz').disabled = true;
+
+        document.getElementById('quiz-title').innerText = quiz.title;
+        document.getElementById('quiz-image').src = quiz.imageUrl || 'https://astrom.com.br/api/Quiz/thumb.webp';
+
+        const quizOptions = document.getElementById('quiz-options');
+        quizOptions.innerHTML = '';
+
+        quiz.options.forEach((option, index) => {
+            const button = document.createElement('button');
+            button.innerText = option;
+            button.classList.add('quiz-option');
+            button.dataset.index = index;
+
+            // Aplica a cor de fundo se houver uma cor selecionada e salvar para o botão selecionado
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.quiz-option').forEach(btn => {
+                    btn.classList.remove('selected');
+                    btn.style.backgroundColor = ''; // Remove a cor de fundo dos outros botões
+                });
+                button.classList.add('selected');
+                selectedAnswer = button.dataset.index;
+                document.getElementById('next-quiz').disabled = false;
+
+                clickResponse.play();
+
+            });
+
+            quizOptions.appendChild(button);
+        });
+    }
+
+        // Função para abrir o popup inicial antes de iniciar o quiz
+        function openInitialPopup() {
+            const initialPopup = document.getElementById('PopFirst');
+            initialPopup.classList.remove('hidden'); // Remover classe que esconde o popup
+            initialPopup.classList.add('visible'); // Adicionar classe que mostra o popup
+        }
+    
+        // Mostrar o popup inicial ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            if (quizzes.length > 0) {
+                openInitialPopup();
+            }
+        });
+
+        // Fechar o popup inicial e iniciar o quiz
+        document.getElementById('initial-popup-button').addEventListener('click', function() {
+            document.getElementById('PopFirst').classList.remove('visible');
+            loadQuiz(quizzes[currentQuizIndex]);
+        });
+
+    // Função para abrir o popup de finalização
+    function openPopup() {
+        document.getElementById('popup').classList.add('visible');
+    }    
+
+    // Função para fechar o popup ao clicar no "X"
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('popup').classList.remove('visible');
+    });
+
+    // Adiciona o evento de clique para avançar ao próximo quiz
+    document.getElementById('next-quiz').addEventListener('click', function() {
+        if (currentQuizIndex < quizzes.length - 1) {
+            currentQuizIndex++;
+            loadQuiz(quizzes[currentQuizIndex]);
+
+            function clearStarRating() {
+                const stars = document.querySelectorAll('.quiz-stars .star');
+                stars.forEach((star) => {
+                    star.classList.remove('active');
+                });
+            }
+
+            clearStarRating();
+
+            clickSound.play();
+
+        } else {
+            openPopup();
+            winSound.play();
+        }
+    });
+
+    // Função para atualizar a exibição das estrelas
+    function updateStarRating(rating) {
+        const stars = document.querySelectorAll('.quiz-stars .star');
+        stars.forEach((star) => {
+            star.classList.remove('active');
+            if (parseInt(star.getAttribute('data-value')) <= rating) {
+                star.classList.add('active');
+            }
+        });
+    }
+
+    // Evento de clique para as estrelas
+    document.querySelectorAll('.quiz-stars .star').forEach((star) => {
+        star.addEventListener('click', function() {
+            currentRating = parseInt(this.getAttribute('data-value'));
+            updateStarRating(currentRating);
+        });
+    });
+
+    // Atualiza as estrelas de acordo com a avaliação atual
+    updateStarRating(currentRating);
+
+    // Função para resetar o quiz (usada ao clicar em "Testar Quiz")
+    function resetQuiz() {
+        currentQuizIndex = 0; // Reseta o índice para o primeiro quiz
+        selectedAnswer = null; // Reseta a resposta selecionada
+        loadQuiz(quizzes[currentQuizIndex]); // Carrega o primeiro quiz
+    }
+
+    // Evento para o botão "Testar Quiz"
+    const QTestBtn = document.getElementById('qTestBtn');
+    if (QTestBtn) {
+        QTestBtn.addEventListener('click', function() {
+            if (quizzes.length > 0) {
+                resetQuiz(); // Reseta o quiz para o primeiro e carrega ele
+            }
+        });
+    }
+
+    // Carregar o primeiro quiz no início
+    if (quizzes.length > 0) {
+        loadQuiz(quizzes[currentQuizIndex]);
+    }
+
+})();
+
+        </script>
+    
